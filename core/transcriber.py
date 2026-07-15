@@ -10,6 +10,8 @@ SARVAM_STT_TRANSLATE_URL = "https://api.sarvam.ai/speech-to-text-translate"
 SARVAM_MODEL = os.getenv("SARVAM_STT_MODEL","saaras:v2.5")
 _model = None
 
+
+# Loading the Local whisper model.
 def load_model():
 
     global _model
@@ -21,6 +23,8 @@ def load_model():
 
     return _model
 
+
+# sending the cliped wav to Sarvam and return the English transcript.
 def _send_to_sarvam(piece_path: str) -> str:
     """Send one <=30s WAV file to Sarvam and return the English transcript."""
     headers = {"api-subscription-key": SARVAM_API_KEY}
@@ -42,11 +46,14 @@ def _send_to_sarvam(piece_path: str) -> str:
 
     return response.json().get("transcript","")
 
+
+
 def transcribe_chunk_whisper(chunk_path: str) -> str:
     model = load_model()
     result = model.transcribe(chunk_path, task="transcribe")
 
     return result["text"]
+
 
 def transcribe_chunk_sarvam(chunk_path : str) ->str:
     """
@@ -79,6 +86,7 @@ def transcribe_chunk_sarvam(chunk_path : str) ->str:
     return full_text.strip()
 
 
+
 def transcribe_chunk(chunk_path: str, language: str ="english") ->str:
     """
     Route one chunk to Whisper or Sarvam depending on language choice.
@@ -89,6 +97,8 @@ def transcribe_chunk(chunk_path: str, language: str ="english") ->str:
     if language.lower() == "hinglish":
         return transcribe_chunk_sarvam(chunk_path)
     return transcribe_chunk_whisper(chunk_path)
+
+
 
 def transcribe_all(chunks: list, language: str = "english") -> str:
     full_transcript = ""
