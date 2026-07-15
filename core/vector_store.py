@@ -33,8 +33,9 @@ def build_vector_store(transcript: str) ->Chroma:
         documents = docs,
         embedding = embeddings,
         collection_name = COLLECTION_NAME,
-        persist_directory=CHROMA_DIR
+        # persist_directory=CHROMA_DIR
     )
+    return vector_store
 
 def load_vector_store() -> Chroma:
     embeddings = get_embeddings()
