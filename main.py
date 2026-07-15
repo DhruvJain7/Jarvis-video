@@ -2,15 +2,7 @@
 
 from dotenv import load_dotenv
 load_dotenv()
-import sys
-try:
-    import audioop
-except ImportError:
-    try:
-        import pyaudioop as audioop
-        sys.modules['audioop'] = audioop
-    except ImportError:
-        pass
+
 from utils.audio_processor import process_input
 from core.transcriber import transcribe_all
 from core.summarise import summarize ,generate_title
