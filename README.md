@@ -1,6 +1,8 @@
 # Jarvis-video
-- A complete AI Meeting Assistant 
-- No more paying for Otter.ai or Fireflies
+An AI meeting platform that transcribes video utilizing local Whisper (English).
+It can even process Hindi/Hinglish using Sarvam AI.
+It extracts insights from the Youtube video / meeting and generate bulleted summaries,key decisions and assigned action items if present.
+In order to provide convenience to user it has RAG-powered chat interface using ChromaDB.
 
 ## What does this tool exactly do :
 - Takes any Youtube url or audio / video file as input.
